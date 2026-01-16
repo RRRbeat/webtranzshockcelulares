@@ -2,38 +2,52 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>TranzShock Celulares 2026</title>
+    <title>TranzShock Interface 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="scenerio-3d">
-        <!-- O BRAÇO TRANSFORMER -->
-        <div class="transformer-arm">
-            
-            <!-- Ombro e Antebraço (Base) -->
+    <div class="transformer-viewport">
+        <div class="mech-arm">
+            <!-- ESTRUTURA DO ROBÔ -->
             <div class="mech-part shoulder"></div>
-            <div class="mech-part forearm-base"></div>
+            <div class="mech-part forearm"></div>
 
-            <!-- O CELULAR (Camada Central) -->
-            <div class="smartphone-device">
-                <div class="screen-glow"></div>
-                <div class="ui-content">
-                    <header>TRANZ SHOCK CELULARES</header>
-                    <nav class="menu-brasileiro">
-                        <button>CATÁLOGO 2026</button>
-                        <button>SOLICITAR REPARO</button>
-                        <button class="btn-neon">MODO Z</button>
-                    </nav>
-                    <div class="energy-info">ENERGIA: 100%</div>
+            <!-- SMARTPHONE CON NAVEGACIÓN -->
+            <div class="smartphone">
+                <div class="screen">
+                    
+                    <!-- CAPA 1: MENU PRINCIPAL -->
+                    <section id="home" class="layer active">
+                        <header>TRANZSHOCK OS</header>
+                        <nav class="menu-brasileiro">
+                            <a href="#modelos" class="btn">MODELOS 2026</a>
+                            <a href="#reparo" class="btn">REPARO TECH</a>
+                            <a href="#missao" class="btn">NOSSA MISSÃO</a>
+                        </nav>
+                    </section>
+
+                    <!-- CAPA 2: MODELOS (TEXTO E IMAGEM) -->
+                    <section id="modelos" class="layer">
+                        <a href="#home" class="back-btn">⬅ VOLTAR</a>
+                        <h2>MODELOS 2026</h2>
+                        <img src="https://via.placeholder.com" alt="Celular 1">
+                        <p>O novo UltraShock G1 possui núcleos de Energon para bateria infinita.</p>
+                    </section>
+
+                    <!-- CAPA 3: REPARO -->
+                    <section id="reparo" class="layer">
+                        <a href="#home" class="back-btn">⬅ VOLTAR</a>
+                        <h2>REPARO TECH</h2>
+                        <p>Oficinas em Cybertron e São Paulo. Conserto em microssegundos.</p>
+                    </section>
+
                 </div>
             </div>
 
-            <!-- GARRAS MECÂNICAS (Por cima do celular) -->
-            <div class="mech-part claw claw-top"></div>
-            <div class="mech-part claw claw-bottom"></div>
-            <div class="mech-part claw thumb"></div>
-            
+            <!-- GARRAS (FRONTALES) -->
+            <div class="mech-part claw top"></div>
+            <div class="mech-part claw bottom"></div>
         </div>
     </div>
 
