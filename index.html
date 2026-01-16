@@ -3,28 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transformer Store 2026</title>
+    <title>TranzShock Interface 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="interface-container">
-        <!-- El brazo mecánico como un objeto SVG para que NO sea cuadrado -->
-        <div class="robot-arm-wrapper">
-            <svg class="robot-svg" viewBox="0 0 500 800">
-                <!-- Esta es la silueta del brazo (puedes cambiar el color en CSS) -->
-                <path d="M50,100 L150,50 L400,150 L450,400 L300,750 L100,700 Z" class="arm-shape" />
-            </svg>
+    <div class="transformer-viewport">
+        <!-- BRAZO MECÁNICO COMPLETO -->
+        <div class="mech-arm">
+            
+            <!-- Hombro y Bicep -->
+            <div class="part shoulder"></div>
+            <div class="part bicep"></div>
+            <div class="part joint"></div>
 
-            <!-- La Pantalla del Celular -->
-            <div class="phone-screen">
-                <div class="glow-border"></div>
-                <header>SISTEMA OPERATIVO v2.6</header>
-                <nav class="menu">
-                    <button>NUEVOS MODELOS</button>
-                    <button>OFERTAS FLASH</button>
-                    <button>SOPORTE TÉCNICO</button>
-                </nav>
+            <!-- Antebrazo (Estructura principal) -->
+            <div class="part forearm-base">
+                <div class="pistons"></div>
+            </div>
+
+            <!-- CELULAR (Sostenido por el robot) -->
+            <div class="hand-grip">
+                <!-- Dedos por detrás -->
+                <div class="finger back f1"></div>
+                
+                <div class="smartphone">
+                    <div class="screen-content">
+                        <div class="scanline"></div>
+                        <header>TRANZSHOCK OS v4.0</header>
+                        <nav class="menu">
+                            <button>CATÁLOGO 2026</button>
+                            <button>REPARACIÓN TECH</button>
+                            <button>SISTEMA ARMADO</button>
+                        </nav>
+                        <div class="energy-status">ENERGÍA AL 88%</div>
+                    </div>
+                </div>
+
+                <!-- Dedos por delante (sujetando) -->
+                <div class="finger front f2"></div>
+                <div class="finger front f3"></div>
             </div>
         </div>
     </div>
