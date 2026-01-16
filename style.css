@@ -1,114 +1,125 @@
 :root {
-    --iron: #2c3e50;
-    --steel: #7f8c8d;
-    --glow: #00f2ff;
-    --dark: #0a0a0a;
+    --steel: #454d55;
+    --dark-metal: #1a1c1e;
+    --neon-energy: #00f2ff;
+    --cyber-glow: 0 0 20px rgba(0, 242, 255, 0.6);
 }
 
 body {
-    background: radial-gradient(circle, #1a1a1a, #000);
-    height: 100vh;
+    background: #000;
     margin: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
+    perspective: 1500px;
 }
 
-.transformer-viewport {
-    perspective: 1200px;
+/* Efeito Cinematográfico de Fundo */
+.cinematic-container {
+    filter: contrast(1.2) brightness(0.8);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.mech-arm {
+.transformer-arm {
     position: relative;
-    width: 500px;
-    height: 700px;
-    transform: rotateY(-15deg) rotateX(5deg);
-    animation: mechFloat 5s ease-in-out infinite;
+    width: 600px;
+    height: 800px;
+    transform-style: preserve-3d;
+    transform: rotateY(-20deg) rotateX(5deg);
+    animation: idle 6s ease-in-out infinite;
 }
 
-/* PIEZAS DEL ROBOT */
-.part {
+/* Armadura do Ombro (Forma não quadrada) */
+.shoulder-armor {
     position: absolute;
-    background: linear-gradient(145deg, #333, #111);
+    width: 250px;
+    height: 200px;
+    background: linear-gradient(135deg, var(--steel), #000);
+    clip-path: polygon(10% 0%, 90% 10%, 100% 70%, 50% 100%, 0% 60%);
+    border: 2px solid #555;
+}
+
+/* Antebraço Complexo */
+.forearm-frame {
+    position: absolute;
+    top: 220px;
+    left: 80px;
+    width: 350px;
+    height: 500px;
+    background: var(--dark-metal);
+    clip-path: polygon(0 15%, 100% 0, 95% 100%, 5% 90%);
+    box-shadow: inset 0 0 50px #000;
+}
+
+/* Placas de Metal Sobrepostas */
+.metal-plate {
+    position: absolute;
+    background: linear-gradient(to right, #333, #666, #222);
     border: 1px solid #444;
-    box-shadow: inset 2px 2px 10px rgba(255,255,255,0.1);
 }
 
-.shoulder {
-    width: 200px; height: 150px;
-    clip-path: polygon(0% 20%, 40% 0%, 100% 30%, 80% 100%, 20% 90%);
-    top: 0; left: -50px;
-    background: linear-gradient(135deg, var(--iron), #000);
-}
+.p1 { width: 100%; height: 60px; top: 20%; clip-path: polygon(0 0, 100% 30%, 90% 100%, 10% 80%); }
+.p2 { width: 80%; height: 100px; bottom: 10%; left: 10%; clip-path: polygon(10% 0, 90% 20%, 100% 100%, 0 100%); }
 
-.bicep {
-    width: 100px; height: 180px;
-    top: 100px; left: 30px;
-    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-    background: repeating-linear-gradient(45deg, #222, #222 10px, #282828 10px, #282828 20px);
-}
-
-.forearm-base {
-    width: 280px; height: 400px;
-    top: 250px; left: 60px;
-    clip-path: polygon(0 15%, 100% 0, 85% 100%, 15% 95%);
-    background: linear-gradient(to right, #1a1a1a, #444, #1a1a1a);
-    border-left: 5px solid var(--glow);
-}
-
-/* CELULAR */
-.smartphone {
+/* Celular Futurista */
+.smartphone-device {
     position: absolute;
-    width: 250px; height: 480px;
-    background: #000;
-    border: 3px solid var(--glow);
-    border-radius: 20px;
-    top: 280px; left: 100px;
+    width: 260px;
+    height: 520px;
+    background: #050505;
+    border: 2px solid var(--neon-energy);
+    border-radius: 30px;
+    top: 250px;
+    left: 130px;
     z-index: 10;
-    box-shadow: 0 0 30px var(--glow);
+    box-shadow: var(--cyber-glow);
     overflow: hidden;
 }
 
-.screen-content {
-    padding: 20px;
-    color: var(--glow);
-    text-shadow: 0 0 5px var(--glow);
-}
-
-/* DEDOS ROBÓTICOS (Aquí se rompe lo cuadrado) */
-.finger {
+/* Garras/Dedos Robóticos (Clip-path Avançado) */
+.claw {
     position: absolute;
-    background: #222;
-    border: 1px solid #555;
-    z-index: 11;
+    background: linear-gradient(45deg, #111, #444);
+    border: 1px solid var(--neon-energy);
+    z-index: 15;
 }
 
-.f1 { width: 60px; height: 150px; top: 350px; left: 60px; clip-path: polygon(0 0, 100% 20%, 80% 100%, 0 80%); } /* Pulgar */
-.f2 { width: 70px; height: 120px; top: 300px; left: 320px; clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%); } /* Índice */
-.f3 { width: 70px; height: 120px; top: 450px; left: 320px; clip-path: polygon(0 0, 100% 20%, 80% 100%, 0 80%); } /* Medio */
+.c1 { width: 80px; height: 150px; top: 400px; left: 50px; clip-path: polygon(0 0, 100% 30%, 80% 100%, 0 80%); } /* Polegar */
+.c2 { width: 100px; height: 100px; top: 320px; left: 350px; clip-path: polygon(0 40%, 100% 0, 80% 100%, 0 80%); } /* Indicador */
+.c3 { width: 100px; height: 100px; top: 480px; left: 350px; clip-path: polygon(0 20%, 100% 50%, 80% 100%, 0 80%); } /* Médio */
 
-/* EFECTOS DINÁMICOS */
-.scanline {
-    width: 100%; height: 2px;
-    background: rgba(0, 242, 255, 0.5);
-    position: absolute;
-    animation: scan 4s linear infinite;
+/* UI Interna do Celular */
+.interface-ui {
+    padding: 30px;
+    color: var(--neon-energy);
+    font-family: 'Courier New', monospace;
 }
 
-@keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-
-@keyframes mechFloat {
-    0%, 100% { transform: translateY(0) rotateY(-15deg); }
-    50% { transform: translateY(-20px) rotateY(-10deg); }
-}
-
-.menu button {
-    width: 100%; padding: 15px; margin: 10px 0;
-    background: rgba(0, 242, 255, 0.1);
-    border: 1px solid var(--glow);
-    color: var(--glow);
-    cursor: pointer;
+.main-nav button {
+    width: 100%;
+    margin: 15px 0;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--neon-energy);
+    color: var(--neon-energy);
     font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main-nav button:hover {
+    background: var(--neon-energy);
+    color: #000;
+}
+
+/* Animações */
+@keyframes idle {
+    0%, 100% { transform: rotateY(-20deg) rotateX(5deg) translateY(0); }
+    50% { transform: rotateY(-15deg) rotateX(2deg) translateY(-15px); }
 }
