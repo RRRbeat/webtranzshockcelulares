@@ -4,70 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TranzShock Beast Mode 2026</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Importamos una fuente futurista -->
     <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        /* --- CSS TOTAL (SEM DEPENDER DE ARQUIVO EXTERNO) --- */
+        :root {
+            --neon: #00f2ff;
+            --metal: #2c3e50;
+            --dark: #050505;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1a1c20 0%, #000 80%);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+        }
+
+        /* VIEWPORT 3D CENTRALIZADA */
+        .transformer-viewport {
+            perspective: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .mech-arm {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            transform-style: preserve-3d;
+            transform: rotateY(-15deg);
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        /* OMBRO E BRAÇO (PEÇAS DEFORMADAS) */
+        .part {
+            position: absolute;
+            background: linear-gradient(135deg, #444, #111);
+            border: 1px solid #555;
+            box-shadow: inset 0 0 20px #000;
+        }
+
+        .shoulder {
+            width: 250px; height: 180px;
+            top: -60px; left: -120px;
+            clip-path: polygon(20% 0%, 100% 20%, 80% 90%, 0% 100%, 10% 30%);
+            z-index: 1;
+        }
+
+        .forearm {
+            width: 320px; height: 500px;
+            top: 50px; left: 40px;
+            clip-path: polygon(5% 0, 95% 5%, 100% 100%, 0% 95%);
+            background: linear-gradient(to right, #1a1a1a, #333, #1a1a1a);
+            z-index: 2;
+        }
+
+        /* CELULAR (O CORAÇÃO DO SITE) */
+        .smartphone {
+            position: absolute;
+            width: 260px; height: 500px;
+            background: #000;
+            border: 2px solid var(--neon);
+            border-radius: 25px;
+            top: 50px; left: 70px;
+            z-index: 5;
+            box-shadow: 0 0 30px var(--neon);
+            overflow: hidden;
+            transform: translateZ(30px);
+        }
+
+        /* CONTEÚDO DAS PÁGINAS */
+        .layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            display: none;
+            flex-direction: column;
+            color: var(--neon);
+        }
+
+        #home { display: flex; }
+        .layer:target { display: flex; animation: scanIn 0.4s; }
+        #home:has(~ .layer:target) { display: none; }
+
+        /* BOTÕES ESTILIZADOS */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid var(--neon);
+            color: var(--neon);
+            text-decoration: none;
+            text-align: center;
+            font-size: 11px;
+            font-weight: bold;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            transition: 0.3s;
+        }
+
+        .btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
+
+        /* GARRAS QUE ABRAÇAM O CELULAR */
+        .claw {
+            position: absolute;
+            background: #15181b;
+            border: 1px solid var(--neon);
+            z-index: 10;
+        }
+
+        .thumb { width: 80px; height: 160px; top: 300px; left: 20px; clip-path: polygon(100% 15%, 100% 85%, 0 100%, 0 0); }
+        .finger-top { width: 120px; height: 90px; top: 80px; right: -20px; clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 80%); }
+        .finger-bottom { width: 130px; height: 100px; top: 430px; right: -30px; clip-path: polygon(0 20%, 100% 40%, 80% 100%, 0 60%); }
+
+        /* ANIMAÇÕES */
+        @keyframes floating {
+            0%, 100% { transform: rotateY(-15deg) translateY(0); }
+            50% { transform: rotateY(-10deg) translateY(-20px); }
+        }
+
+        @keyframes scanIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        header { font-size: 10px; text-align: center; margin-bottom: 40px; letter-spacing: 2px; }
+        h2 { font-size: 14px; text-align: center; border-bottom: 1px solid var(--neon); padding-bottom: 5px; }
+        p { font-size: 11px; text-align: center; line-height: 1.6; }
+    </style>
 </head>
 <body>
 
     <div class="transformer-viewport">
         <div class="mech-arm">
             
-            <!-- ESTRUCTURA DEL ROBOT (CAPAS TRASERAS) -->
-            <div class="mech-part shoulder"></div>
-            <div class="mech-part bicep"></div>
-            <div class="mech-part forearm-base"></div>
+            <!-- Braço e Ombro -->
+            <div class="part shoulder"></div>
+            <div class="part forearm"></div>
 
-            <!-- SMARTPHONE (CAPA CENTRAL) -->
+            <!-- Celular -->
             <div class="smartphone">
-                <div class="screen">
-                    
-                    <!-- CAPA 1: MENU PRINCIPAL -->
-                    <section id="home" class="layer">
-                        <header>TRANZSHOCK OS v4.0</header>
-                        <nav class="menu-brasileiro">
-                            <a href="#modelos" class="btn-nav">MODELOS 2026</a>
-                            <a href="#reparo" class="btn-nav">REPARO TECH</a>
-                            <a href="#missao" class="btn-nav">NOSSA MISSÃO</a>
-                        </nav>
-                        <div class="status-footer">SISTEMA OPERACIONAL ATIVO</div>
-                    </section>
+                
+                <!-- HOME -->
+                <section id="home" class="layer">
+                    <header>TRANZSHOCK_OS_v4.0</header>
+                    <a href="#modelos" class="btn">MODELOS 2026</a>
+                    <a href="#reparo" class="btn">REPARO TECH</a>
+                    <a href="#missao" class="btn">NOSSA MISSÃO</a>
+                </section>
 
-                    <!-- CAPA 2: MODELOS -->
-                    <section id="modelos" class="layer">
-                        <a href="#home" class="back-btn">⬅ VOLTAR</a>
-                        <h2>MODELOS 2026</h2>
-                        <div class="content-img-frame">
-                            <img src="https://via.placeholder.com" alt="Modelo G1">
-                        </div>
-                        <p class="desc-text">O novo UltraShock G1 posee núcleos de Energon para bateria infinita e carcaça de vibranium.</p>
-                    </section>
+                <!-- MODELOS -->
+                <section id="modelos" class="layer">
+                    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                    <h2>MODELOS 2026</h2>
+                    <p>Conheça a linha Ultra G1 com carcaça de metal líquido.</p>
+                    <img src="https://via.placeholder.com" style="width: 100%; margin-top: 20px;">
+                </section>
 
-                    <!-- CAPA 3: REPARO -->
-                    <section id="reparo" class="layer">
-                        <a href="#home" class="back-btn">⬅ VOLTAR</a>
-                        <h2>REPARO TECH</h2>
-                        <p class="desc-text">Oficinas autorizadas em Cybertron e São Paulo. Conserto de hardware em microssegundos.</p>
-                        <div class="scan-effect"></div>
-                    </section>
+                <!-- REPARO -->
+                <section id="reparo" class="layer">
+                    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                    <h2>REPARO TECH</h2>
+                    <p>Consertos em nano-segundos usando tecnologia de Cybertron.</p>
+                </section>
 
-                    <!-- CAPA 4: NOSSA MISSÃO (CORREGIDA) -->
-                    <section id="missao" class="layer">
-                        <a href="#home" class="back-btn">⬅ VOLTAR</a>
-                        <h2>NOSSA MISSÃO</h2>
-                        <div class="content-img-frame">
-                            <img src="https://via.placeholder.com" alt="Missão">
-                        </div>
-                        <p class="desc-text">Fundada em 2026, a TranzShock visa fundir a tecnologia alienígena com a mobilidade humana urbana.</p>
-                    </section>
+                <!-- MISSÃO -->
+                <section id="missao" class="layer">
+                    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                    <h2>NOSSA MISSÃO</h2>
+                    <p>Fundir a vida orgânica com a perfeição mecânica através de dispositivos móveis.</p>
+                </section>
 
-                </div>
             </div>
 
-            <!-- GARRAS MECÁNICAS (CAPAS FRONTALES QUE SUJETAN) -->
-            <div class="mech-part claw thumb"></div>
-            <div class="mech-part claw finger-top"></div>
-            <div class="mech-part claw finger-bottom"></div>
+            <!-- Garras Frontais -->
+            <div class="claw thumb"></div>
+            <div class="claw finger-top"></div>
+            <div class="claw finger-bottom"></div>
 
         </div>
     </div>
