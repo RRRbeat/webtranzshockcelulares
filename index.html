@@ -2,52 +2,73 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>TranzShock Interface 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TranzShock Beast Mode 2026</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Importamos una fuente futurista -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
 </head>
 <body>
 
     <div class="transformer-viewport">
         <div class="mech-arm">
-            <!-- ESTRUTURA DO ROBÔ -->
+            
+            <!-- ESTRUCTURA DEL ROBOT (CAPAS TRASERAS) -->
             <div class="mech-part shoulder"></div>
-            <div class="mech-part forearm"></div>
+            <div class="mech-part bicep"></div>
+            <div class="mech-part forearm-base"></div>
 
-            <!-- SMARTPHONE CON NAVEGACIÓN -->
+            <!-- SMARTPHONE (CAPA CENTRAL) -->
             <div class="smartphone">
                 <div class="screen">
                     
                     <!-- CAPA 1: MENU PRINCIPAL -->
-                    <section id="home" class="layer active">
-                        <header>TRANZSHOCK OS</header>
+                    <section id="home" class="layer">
+                        <header>TRANZSHOCK OS v4.0</header>
                         <nav class="menu-brasileiro">
-                            <a href="#modelos" class="btn">MODELOS 2026</a>
-                            <a href="#reparo" class="btn">REPARO TECH</a>
-                            <a href="#missao" class="btn">NOSSA MISSÃO</a>
+                            <a href="#modelos" class="btn-nav">MODELOS 2026</a>
+                            <a href="#reparo" class="btn-nav">REPARO TECH</a>
+                            <a href="#missao" class="btn-nav">NOSSA MISSÃO</a>
                         </nav>
+                        <div class="status-footer">SISTEMA OPERACIONAL ATIVO</div>
                     </section>
 
-                    <!-- CAPA 2: MODELOS (TEXTO E IMAGEM) -->
+                    <!-- CAPA 2: MODELOS -->
                     <section id="modelos" class="layer">
                         <a href="#home" class="back-btn">⬅ VOLTAR</a>
                         <h2>MODELOS 2026</h2>
-                        <img src="https://via.placeholder.com" alt="Celular 1">
-                        <p>O novo UltraShock G1 possui núcleos de Energon para bateria infinita.</p>
+                        <div class="content-img-frame">
+                            <img src="https://via.placeholder.com" alt="Modelo G1">
+                        </div>
+                        <p class="desc-text">O novo UltraShock G1 posee núcleos de Energon para bateria infinita e carcaça de vibranium.</p>
                     </section>
 
                     <!-- CAPA 3: REPARO -->
                     <section id="reparo" class="layer">
                         <a href="#home" class="back-btn">⬅ VOLTAR</a>
                         <h2>REPARO TECH</h2>
-                        <p>Oficinas em Cybertron e São Paulo. Conserto em microssegundos.</p>
+                        <p class="desc-text">Oficinas autorizadas em Cybertron e São Paulo. Conserto de hardware em microssegundos.</p>
+                        <div class="scan-effect"></div>
+                    </section>
+
+                    <!-- CAPA 4: NOSSA MISSÃO (CORREGIDA) -->
+                    <section id="missao" class="layer">
+                        <a href="#home" class="back-btn">⬅ VOLTAR</a>
+                        <h2>NOSSA MISSÃO</h2>
+                        <div class="content-img-frame">
+                            <img src="https://via.placeholder.com" alt="Missão">
+                        </div>
+                        <p class="desc-text">Fundada em 2026, a TranzShock visa fundir a tecnologia alienígena com a mobilidade humana urbana.</p>
                     </section>
 
                 </div>
             </div>
 
-            <!-- GARRAS (FRONTALES) -->
-            <div class="mech-part claw top"></div>
-            <div class="mech-part claw bottom"></div>
+            <!-- GARRAS MECÁNICAS (CAPAS FRONTALES QUE SUJETAN) -->
+            <div class="mech-part claw thumb"></div>
+            <div class="mech-part claw finger-top"></div>
+            <div class="mech-part claw finger-bottom"></div>
+
         </div>
     </div>
 
