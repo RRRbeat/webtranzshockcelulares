@@ -1,53 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transformer UI - 2026</title>
+    <title>Transformer Store 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Filtro de ruído cinematográfico -->
-    <div class="film-grain"></div>
+    <div class="interface-container">
+        <!-- El brazo mecánico como un objeto SVG para que NO sea cuadrado -->
+        <div class="robot-arm-wrapper">
+            <svg class="robot-svg" viewBox="0 0 500 800">
+                <!-- Esta es la silueta del brazo (puedes cambiar el color en CSS) -->
+                <path d="M50,100 L150,50 L400,150 L450,400 L300,750 L100,700 Z" class="arm-shape" />
+            </svg>
 
-    <div class="scenerio">
-        <div class="robot-arm">
-            <!-- Partes Mecânicas -->
-            <div class="shoulder"></div>
-            <div class="bicep"></div>
-            
-            <div class="forearm">
-                <!-- O CELULAR (PANTALLA) -->
-                <div class="phone-frame">
-                    <div class="inner-screen">
-                        <div class="scan-line"></div> <!-- Linha de scan estilo radar -->
-                        
-                        <header class="os-header">
-                            <span class="status-dot"></span> ENERGON_OS v2.6
-                        </header>
-                        
-                        <nav class="menu-options">
-                            <button>ESTADO MECÂNICO</button>
-                            <button>PROTOCOLOS</button>
-                            <button>MAPA ESTELAR</button>
-                            <button class="danger">AUTODESTRUIÇÃO</button>
-                        </nav>
-                        
-                        <div class="radar-container">
-                            <div class="radar-circle"></div>
-                            <div class="radar-ping"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dedos Robóticos -->
-                <div class="finger f1"></div>
-                <div class="finger f2"></div>
-                <div class="finger f3"></div>
+            <!-- La Pantalla del Celular -->
+            <div class="phone-screen">
+                <div class="glow-border"></div>
+                <header>SISTEMA OPERATIVO v2.6</header>
+                <nav class="menu">
+                    <button>NUEVOS MODELOS</button>
+                    <button>OFERTAS FLASH</button>
+                    <button>SOPORTE TÉCNICO</button>
+                </nav>
             </div>
         </div>
     </div>
 
 </body>
 </html>
+
