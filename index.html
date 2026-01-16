@@ -1,41 +1,52 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>TranzShock Core 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TranzShock Celulares - Modo Beast</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS de emergência caso o arquivo style.css não carregue */
+        body { background-color: #000 !important; color: #00f2ff; }
+        .transformer-container { display: flex; justify-content: center; align-items: center; height: 100vh; }
+    </style>
 </head>
 <body>
-    <div class="scenerio">
-        <div class="transformer-arm">
-            
-            <!-- Piezas del brazo -->
-            <div class="part shoulder"></div>
-            <div class="part forearm">
-                
-                <!-- GARRAS TRASERAS (Detrás del cel) -->
-                <div class="claw back-claw"></div>
 
-                <!-- EL CELULAR (CENTRO) -->
-                <div class="smartphone">
-                    <div class="glass-reflect"></div>
+    <div class="transformer-container">
+        <div class="mech-arm">
+            <!-- Peças da Armadura (Deformadas via CSS) -->
+            <div class="armor shoulder"></div>
+            <div class="armor bicep"></div>
+            
+            <div class="forearm-chassis">
+                <!-- CABO DE ENERGIA NEON -->
+                <div class="energy-cable"></div>
+
+                <!-- O CELULAR (A TELA PRINCIPAL) -->
+                <div class="smartphone-frame">
                     <div class="screen-content">
-                        <header>SYSTEM ONLINE - 2026</header>
-                        <div class="menu">
-                            <button>EXPLORAR MODELOS</button>
-                            <button>SOLICITAR REPARO</button>
-                            <button>MODO ASALTO</button>
+                        <div class="glitch-overlay"></div>
+                        <header>SISTEMA TRANZSHOCK v4.0</header>
+                        
+                        <div class="main-menu">
+                            <button onclick="alert('Carregando Modelos...')">MODELOS 2026</button>
+                            <button onclick="alert('Iniciando Suporte...')">SUPORTE TÉCNICO</button>
+                            <button class="btn-special">EDIÇÃO TRANSFORMER</button>
                         </div>
-                        <div class="battery-bar"><span></span></div>
+
+                        <div class="status-bar">STATUS: OPERACIONAL</div>
                     </div>
                 </div>
 
-                <!-- GARRAS FRONTALES (Sujetando el cel) -->
-                <div class="claw front-claw-top"></div>
-                <div class="claw front-claw-bottom"></div>
-                
+                <!-- GARRAS QUE SEGURAM O CELULAR -->
+                <div class="claw thumb"></div>
+                <div class="claw finger-top"></div>
+                <div class="claw finger-bottom"></div>
             </div>
         </div>
     </div>
+
 </body>
 </html>
+
