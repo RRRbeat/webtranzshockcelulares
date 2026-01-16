@@ -2,118 +2,196 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>TranzShock Assault Mode 2026</title>
+    <title>TranzShock Ultra 2026</title>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
         :root {
             --neon: #00f2ff;
-            --danger: #ff0044;
-            --metal: #1a1c20;
-            --transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --metal: #2c3e50;
+            --dark: #050505;
+            --transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         body {
-            background: #000;
+            background: radial-gradient(circle at center, #1a1c20 0%, #000 80%);
             margin: 0; height: 100vh;
             display: flex; justify-content: center; align-items: center;
             overflow: hidden; font-family: 'Orbitron', sans-serif;
-            transition: background 0.5s;
         }
 
-        /* ESCENARIO */
+        /* ESCENARIO 3D */
         .transformer-viewport {
-            perspective: 1500px;
+            perspective: 1200px;
             display: flex; justify-content: center; align-items: center;
+            width: 100vw; height: 100vh;
         }
 
         .mech-arm {
             position: relative;
-            width: 450px; height: 650px;
+            width: 400px; height: 600px;
             transform-style: preserve-3d;
             transform: rotateY(-15deg);
-            transition: var(--transition);
+            animation: floating 5s ease-in-out infinite;
         }
 
-        /* PIEZAS DEL ROBOT */
+        /* PIEZAS DEL ROBOT CON ANIMACIÓN DE ENTRADA */
         .part {
             position: absolute;
-            background: linear-gradient(135deg, #333, #111);
-            border: 1px solid #444;
+            background: linear-gradient(135deg, #444, #111);
+            border: 1px solid #555;
+            box-shadow: inset 0 0 20px #000;
             transition: var(--transition);
         }
 
         .shoulder {
             width: 250px; height: 180px;
-            top: -60px; left: -100px;
+            top: -60px; left: -120px;
             clip-path: polygon(20% 0%, 100% 20%, 80% 90%, 0% 100%, 10% 30%);
             z-index: 1;
+            animation: assembleShoulder 1.2s ease-out;
         }
 
-        /* CELULAR */
+        /* EL CELULAR (CENTRO DEL MENÚ) */
         .smartphone {
             position: absolute;
             width: 260px; height: 500px;
             background: #000;
             border: 2px solid var(--neon);
             border-radius: 25px;
-            top: 50px; left: 80px;
+            top: 50px; left: 70px;
             z-index: 5;
-            box-shadow: 0 0 20px var(--neon);
+            box-shadow: 0 0 30px var(--neon);
             overflow: hidden;
-            transition: var(--transition);
+            transform: translateZ(30px);
+            animation: assemblePhone 1s ease-out;
         }
 
-        /* GARRAS */
+        /* NAVEGACIÓN POR CAPAS */
+        .layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            display: none;
+            flex-direction: column;
+            color: var(--neon);
+        }
+
+        #home { display: flex; }
+        .layer:target { display: flex; animation: scanIn 0.4s; }
+        #home:has(~ .layer:target) { display: none; }
+
+        /* BOTONES DEL MENÚ */
+        .btn {
+            display: block; width: 100%; padding: 15px; margin: 10px 0;
+            background: rgba(0, 242, 255, 0.05); border: 1px solid var(--neon);
+            color: var(--neon); text-decoration: none; text-align: center;
+            font-size: 11px; font-weight: bold;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            transition: 0.3s;
+        }
+        .btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
+
+        /* GARRAS MECÁNICAS */
         .claw {
             position: absolute;
-            background: #15181b;
-            border: 1px solid var(--neon);
-            z-index: 10;
-            transition: var(--transition);
+            background: #15181b; border: 1px solid var(--neon);
+            z-index: 10; transition: var(--transition);
         }
 
-        .thumb { width: 80px; height: 180px; top: 300px; left: 20px; clip-path: polygon(100% 15%, 100% 85%, 0 100%, 0 0); }
-        .finger-top { width: 120px; height: 100px; top: 70px; right: -30px; clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 80%); }
-        .finger-bottom { width: 130px; height: 110px; top: 430px; right: -40px; clip-path: polygon(0 20%, 100% 40%, 80% 100%, 0 60%); }
-
-        /* --- ESTADO DE ATAQUE (ACTIVADO CON JS) --- */
-        body.assault-mode { background: #1a0000; }
-
-        .assault-mode .smartphone { border-color: var(--danger); box-shadow: 0 0 40px var(--danger); }
-        
-        .assault-mode .claw { border-color: var(--danger); }
-        
-        /* Deformación de las garras en ataque */
-        .assault-mode .finger-top { transform: rotate(-30deg) translateX(-40px); }
-        .assault-mode .finger-bottom { transform: rotate(30deg) translateX(-40px); }
-        .assault-mode .thumb { transform: scaleX(1.5) translateX(20px); }
-        
-        /* El brazo se inclina hacia adelante */
-        .assault-mode .mech-arm { transform: rotateY(-5deg) rotateX(15deg) scale(1.1); }
-
-        /* INTERFAZ DEL CELULAR */
-        .ui { padding: 20px; text-align: center; color: var(--neon); }
-        .btn-assault {
-            display: block; width: 100%; padding: 15px; margin-top: 50px;
-            background: rgba(255, 0, 68, 0.1); border: 2px solid var(--danger);
-            color: var(--danger); font-weight: bold; cursor: pointer;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        .thumb { 
+            width: 80px; height: 160px; top: 300px; left: 20px; 
+            clip-path: polygon(100% 15%, 100% 85%, 0 100%, 0 0);
+            animation: assembleClawLeft 1.5s ease-out;
         }
+
+        .finger-top { 
+            width: 120px; height: 90px; top: 80px; right: -20px; 
+            clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 80%);
+            animation: assembleClawRight 1.5s ease-out;
+        }
+
+        .finger-bottom { 
+            width: 130px; height: 100px; top: 430px; right: -30px; 
+            clip-path: polygon(0 20%, 100% 40%, 80% 100%, 0 60%);
+            animation: assembleClawRight 1.7s ease-out;
+        }
+
+        /* ANIMACIONES DE "ARMADO" (TRANSFORMACIÓN INICIAL) */
+        @keyframes assemblePhone {
+            from { transform: translateZ(200px) scale(0); opacity: 0; }
+            to { transform: translateZ(30px) scale(1); opacity: 1; }
+        }
+
+        @keyframes assembleShoulder {
+            from { left: -300px; transform: rotate(-45deg); opacity: 0; }
+            to { left: -120px; transform: rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes assembleClawRight {
+            from { right: -200px; opacity: 0; }
+            to { right: -20px; opacity: 1; }
+        }
+
+        @keyframes assembleClawLeft {
+            from { left: -200px; opacity: 0; }
+            to { left: 20px; opacity: 1; }
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: rotateY(-15deg) translateY(0); }
+            50% { transform: rotateY(-10deg) translateY(-20px); }
+        }
+
+        @keyframes scanIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        header { font-size: 10px; text-align: center; margin-bottom: 40px; letter-spacing: 2px; }
+        h2 { font-size: 14px; text-align: center; border-bottom: 1px solid var(--neon); padding-bottom: 5px; }
+        p { font-size: 11px; text-align: center; line-height: 1.6; }
     </style>
 </head>
-<body id="body">
+<body>
 
     <div class="transformer-viewport">
-        <div id="robot" class="mech-arm">
+        <div class="mech-arm">
             
             <div class="part shoulder"></div>
             
             <div class="smartphone">
-                <div class="ui">
-                    <header>STATUS: <span id="status">DEFESA</span></header>
-                    <button class="btn-assault" onclick="toggleAssault()">MODO ASALTO</button>
-                    <p style="font-size: 10px; margin-top: 20px;">Clique para ativar protocolos de combate 2026.</p>
-                </div>
+                <!-- HOME (MENU PRINCIPAL) -->
+                <section id="home" class="layer">
+                    <header>TRANZSHOCK_OS_v4.0</header>
+                    <a href="#modelos" class="btn">MODELOS 2026</a>
+                    <a href="#reparo" class="btn">REPARO TECH</a>
+                    <a href="#missao" class="btn">NOSSA MISSÃO</a>
+                </nav>
+                </section>
+
+                <!-- MODELOS -->
+                <section id="modelos" class="layer">
+                    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                    <h2>MODELOS 2026</h2>
+                    <img src="https://via.placeholder.com" style="width: 100%; margin: 20px 0;">
+                    <p>Linha Ultra G1 com núcleos de Energon para durabilidade máxima.</p>
+                </section>
+
+                <!-- REPARO -->
+                <section id="reparo" class="layer">
+                    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                    <h2>REPARO TECH</h2>
+                    <p>Consertos rápidos com peças originais de Cybertron em São Paulo.</p>
+                </section>
+
+                <!-- MISSÃO -->
+                <section id="missao" class="layer">
+                    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                    <h2>NOSSA MISSÃO</h2>
+                    <p>A TranzShock integra tecnologia mecânica avançada ao dia a dia humano.</p>
+                </section>
             </div>
 
             <div class="claw thumb"></div>
@@ -123,23 +201,6 @@
         </div>
     </div>
 
-    <script>
-        function toggleAssault() {
-            const body = document.getElementById('body');
-            const status = document.getElementById('status');
-            
-            // Alternar la clase en el body para cambiar todo el CSS
-            body.classList.toggle('assault-mode');
-            
-            if (body.classList.contains('assault-mode')) {
-                status.innerText = "ATAQUE";
-                status.style.color = "#ff0044";
-            } else {
-                status.innerText = "DEFESA";
-                status.style.color = "#00f2ff";
-            }
-        }
-    </script>
 </body>
 </html>
 
