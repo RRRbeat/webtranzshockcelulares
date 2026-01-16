@@ -2,51 +2,40 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TranzShock Celulares - Modo Beast</title>
+    <title>TranzShock Beast - 2026</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* CSS de emergência caso o arquivo style.css não carregue */
-        body { background-color: #000 !important; color: #00f2ff; }
-        .transformer-container { display: flex; justify-content: center; align-items: center; height: 100vh; }
-    </style>
 </head>
 <body>
 
-    <div class="transformer-container">
-        <div class="mech-arm">
-            <!-- Peças da Armadura (Deformadas via CSS) -->
-            <div class="armor shoulder"></div>
-            <div class="armor bicep"></div>
+    <div class="scenerio-3d">
+        <!-- O BRAÇO TRANSFORMER -->
+        <div class="transformer-arm">
             
-            <div class="forearm-chassis">
-                <!-- CABO DE ENERGIA NEON -->
-                <div class="energy-cable"></div>
+            <!-- Ombro e Antebraço (Base) -->
+            <div class="mech-part shoulder"></div>
+            <div class="mech-part forearm-base"></div>
 
-                <!-- O CELULAR (A TELA PRINCIPAL) -->
-                <div class="smartphone-frame">
-                    <div class="screen-content">
-                        <div class="glitch-overlay"></div>
-                        <header>SISTEMA TRANZSHOCK v4.0</header>
-                        
-                        <div class="main-menu">
-                            <button onclick="alert('Carregando Modelos...')">MODELOS 2026</button>
-                            <button onclick="alert('Iniciando Suporte...')">SUPORTE TÉCNICO</button>
-                            <button class="btn-special">EDIÇÃO TRANSFORMER</button>
-                        </div>
-
-                        <div class="status-bar">STATUS: OPERACIONAL</div>
-                    </div>
+            <!-- O CELULAR (Camada Central) -->
+            <div class="smartphone-device">
+                <div class="screen-glow"></div>
+                <div class="ui-content">
+                    <header>SISTEMA OPERACIONAL</header>
+                    <nav class="menu-brasileiro">
+                        <button>CATÁLOGO 2026</button>
+                        <button>SOLICITAR REPARO</button>
+                        <button class="btn-neon">MODO ASALTO</button>
+                    </nav>
+                    <div class="energy-info">ENERGIA: 100%</div>
                 </div>
-
-                <!-- GARRAS QUE SEGURAM O CELULAR -->
-                <div class="claw thumb"></div>
-                <div class="claw finger-top"></div>
-                <div class="claw finger-bottom"></div>
             </div>
+
+            <!-- GARRAS MECÂNICAS (Por cima do celular) -->
+            <div class="mech-part claw claw-top"></div>
+            <div class="mech-part claw claw-bottom"></div>
+            <div class="mech-part claw thumb"></div>
+            
         </div>
     </div>
 
 </body>
 </html>
-
