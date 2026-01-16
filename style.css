@@ -1,117 +1,72 @@
-:root {
-    --neon-blue: #00f2ff;
-    --dark-metal: #121418;
-    --steel: #34495e;
-}
+/* ... (Mantener los estilos anteriores del robot y añadir estos) ... */
 
-body {
-    background: radial-gradient(circle, #1a1a1a, #000);
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    perspective: 1200px;
-}
-
-.transformer-arm {
-    position: relative;
-    width: 450px;
-    height: 600px;
-    transform-style: preserve-3d;
-    transform: rotateY(-20deg) rotateX(5deg);
-    animation: float 5s ease-in-out infinite;
-}
-
-/* PIEZAS MECÁNICAS DEFORMADAS */
-.mech-part {
+.smartphone {
     position: absolute;
-    background: linear-gradient(135deg, #444, #111);
-    border: 1px solid #555;
-    box-shadow: inset 0 0 20px #000;
-}
-
-.shoulder {
-    width: 220px; height: 160px;
-    top: -50px; left: -80px;
-    clip-path: polygon(10% 0, 100% 20%, 90% 100%, 0 80%);
-}
-
-.forearm-base {
-    width: 300px; height: 450px;
-    top: 100px; left: 50px;
-    clip-path: polygon(5% 0, 95% 10%, 100% 100%, 0% 90%);
-    background: linear-gradient(to right, #222, var(--steel), #222);
-}
-
-/* EL CELULAR - SEGURO Y VISIBLE */
-.smartphone-device {
-    position: absolute;
-    width: 250px;
-    height: 480px;
+    width: 260px; height: 500px;
     background: #000;
-    border: 3px solid var(--neon-blue);
+    border: 2px solid #00f2ff;
     border-radius: 20px;
-    top: 80px;
-    left: 100px;
-    z-index: 5; /* Capa media */
-    box-shadow: 0 0 40px rgba(0, 242, 255, 0.4);
+    top: 100px; left: 120px;
+    z-index: 5;
     overflow: hidden;
 }
 
-.ui-content {
-    padding: 25px;
-    color: var(--neon-blue);
-    font-family: 'Arial Black', sans-serif;
-    text-align: center;
+/* LÓGICA DE CAPAS */
+.layer {
+    position: absolute;
+    width: 100%; height: 100%;
+    background: #000;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #00f2ff;
+    display: none; /* Escondido por defecto */
+    flex-direction: column;
+    align-items: center;
+    transition: 0.5s;
 }
 
-.menu-brasileiro button {
-    width: 100%;
-    padding: 15px;
+/* Mostrar capa activa mediante el ID en la URL (#) */
+.layer:target {
+    display: flex;
+    animation: glitchIn 0.3s ease-out;
+}
+
+/* Si no hay nada seleccionado, mostrar Home */
+#home { display: flex; }
+#home:has(~ section:target) { display: none; }
+
+/* ESTILOS DE TEXTO Y BOTONES */
+header { font-size: 14px; margin-bottom: 30px; letter-spacing: 2px; }
+
+.btn, .back-btn {
+    display: block;
+    width: 90%;
+    padding: 12px;
     margin: 10px 0;
-    background: transparent;
-    border: 1px solid var(--neon-blue);
-    color: var(--neon-blue);
-    font-weight: bold;
-    cursor: pointer;
+    border: 1px solid #00f2ff;
+    text-decoration: none;
+    color: #00f2ff;
+    text-align: center;
+    font-size: 12px;
     clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-    transition: 0.3s;
 }
 
-.menu-brasileiro button:hover {
-    background: var(--neon-blue);
-    color: #000;
+.btn:hover { background: #00f2ff; color: #000; }
+
+.layer img {
+    width: 100%;
+    border: 1px solid #333;
+    margin: 15px 0;
 }
 
-/* GARRAS - DEFORMADAS Y POR ENCIMA */
-.claw {
-    z-index: 10; /* Encima del celular */
-    background: #1a1a1a;
-    border: 1px solid var(--neon-blue);
+/* ANIMACIONES */
+@keyframes glitchIn {
+    0% { opacity: 0; transform: scale(0.9) skewX(20deg); }
+    100% { opacity: 1; transform: scale(1) skewX(0deg); }
 }
 
-.claw-top {
-    width: 120px; height: 100px;
-    top: 50px; right: -50px;
-    clip-path: polygon(0 40%, 100% 0, 80% 100%, 0 100%);
-}
-
-.claw-bottom {
-    width: 120px; height: 100px;
-    top: 400px; right: -50px;
-    clip-path: polygon(0 0, 100% 40%, 100% 100%, 0 60%);
-}
-
-.thumb {
-    width: 80px; height: 150px;
-    top: 250px; left: 30px;
-    clip-path: polygon(100% 20%, 100% 80%, 0 100%, 0 0);
-}
-
-/* ANIMACIÓN */
-@keyframes float {
-    0%, 100% { transform: rotateY(-20deg) rotateX(5deg) translateY(0); }
-    50% { transform: rotateY(-15deg) rotateX(2deg) translateY(-20px); }
-}
+/* MANTENER EL ROBOT (Simplificado para visualización) */
+.mech-part { position: absolute; background: #222; border: 1px solid #444; }
+.shoulder { width: 200px; height: 150px; clip-path: polygon(0 0, 100% 20%, 80% 100%, 0 80%); top: 20px; left: -20px; }
+.claw { z-index: 10; border-color: #00f2ff; }
+.top { width: 100px; height: 80px; top: 100px; right: -40px; clip-path: polygon(0 40%, 100% 0, 80% 100%, 0 100%); }
