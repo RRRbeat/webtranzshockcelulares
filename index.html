@@ -21,7 +21,6 @@
             overflow: hidden; font-family: 'Orbitron', sans-serif;
         }
 
-        /* ESCENARIO 3D CENTRADO */
         .transformer-viewport {
             perspective: 1200px;
             display: flex; justify-content: center; align-items: center;
@@ -34,10 +33,8 @@
             transform-style: preserve-3d;
             transform: rotateY(-15deg);
             animation: floating 5s ease-in-out infinite;
-            /* Eliminamos desplazamientos fijos para que use el flex del padre */
         }
 
-        /* PIEZAS DEL ROBOT */
         .part {
             position: absolute;
             background: linear-gradient(135deg, #444, #111);
@@ -54,7 +51,6 @@
             animation: assembleShoulder 1.2s ease-out;
         }
 
-        /* EL CELULAR */
         .smartphone {
             position: absolute;
             width: 260px; height: 500px;
@@ -113,66 +109,113 @@
         header { font-size: 10px; text-align: center; margin-bottom: 40px; letter-spacing: 2px; }
         h2 { font-size: 14px; text-align: center; border-bottom: 1px solid var(--neon); padding-bottom: 5px; }
         p { font-size: 11px; text-align: center; line-height: 1.6; }
+        /* Título LIVE neón */
+#live h2 {
+    color: #ff0055;
+    text-shadow:
+        0 0 5px #ff0055,
+        0 0 10px #ff0055,
+        0 0 20px #ff0055,
+        0 0 40px #ff0055,
+        0 0 80px #ff0055;
+    animation: neon-flicker 1.5s infinite alternate;
+}
+
+/* Botón LIVE animado en Home */
+#home a[href="#live"] {
+    animation: pulse-neon 1.2s infinite alternate;
+}
+
+/* Sombra luminosa del video */
+#live video {
+    box-shadow: 0 0 20px #ff0055, 0 0 40px #ff0055, 0 0 60px #ff0055;
+    border: 2px solid #ff0055;
+}
+
+/* Animaciones */
+@keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.8; }
+}
+
+@keyframes pulse-neon {
+    0% { box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; }
+    50% { box-shadow: 0 0 20px #ff0055, 0 0 40px #ff0055; }
+    100% { box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; }
+}
+
     </style>
 </head>
 <body>
 
-    <div class="transformer-viewport">
-        <div class="mech-arm">
-            <div class="part shoulder"></div>
-            
-            <div class="smartphone">
-                <!-- HOME -->
-                <section id="home" class="layer">
-                    <header>TRANZ SHOCK CELULARES</header>
-                    <!-- El href debe coincidir con el id del section de abajo -->
-                    <a href="#web-dev" class="btn">Desenvolvimento WEB e APP</a>
-                    <a href="#reparo" class="btn">CONSERTAR CELULAR</a>
-                    <a href="#missao" class="btn">NOSSA MISSÃO</a>
-                </section>
+<div class="transformer-viewport">
+    <div class="mech-arm">
+        <div class="part shoulder"></div>
 
-              <!-- DESENVOLVIMENTO WEB E APP -->
-<section id="web-dev" class="layer">
-    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
-    <h2>WEB & APP DEV</h2>
-    <p>Criação de sites e aplicativos futuristas.</p>
-    
-    <!-- Link com 55 (Brasil) + 21 (Rio) + Número -->
-    <a href="https://wa.me/5521987624183" target="_blank" class="btn btn-ws">
-        ORÇAMENTO WEB
-    </a>
-</section>
+        <div class="smartphone">
+            <!-- HOME -->
+            <section id="home" class="layer">
+                <header>TRANZ SHOCK CELULARES</header>
+                <a href="#web-dev" class="btn">Desenvolvimento WEB e APP</a>
+                <a href="#reparo" class="btn">CONSERTAR CELULAR</a>
+                <a href="#missao" class="btn">NOSSA MISSÃO</a>
+                <!-- NUEVO BOTÓN LIVE -->
+                <a href="#live" class="btn" style="background: rgba(255,0,0,0.1); border-color: #ff0000; color: #ff0000;">AO VIVO / LIVE</a>
+            </section>
 
-<!-- REPARO TECH -->
-<section id="reparo" class="layer">
-    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
-    <h2>REPARO TECH</h2>
-    <p>Consertos rápidos com peças originais.</p>
-    
-    <!-- Link com 55 (Brasil) + 21 (Rio) + Número -->
-    <a href="https://wa.me/5521987624183" target="_blank" class="btn btn-ws">
-        WHATSAPP
-    </a>
-</section>
+            <!-- DESENVOLVIMENTO WEB E APP -->
+            <section id="web-dev" class="layer">
+                <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                <h2>WEB & APP DEV</h2>
+                <p>Criação de sites e aplicativos futuristas.</p>
+                <a href="https://wa.me/5521987624183" target="_blank" class="btn btn-ws">ORÇAMENTO WEB</a>
+            </section>
 
-</section>
+            <!-- REPARO TECH -->
+            <section id="reparo" class="layer">
+                <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                <h2>REPARO TECH</h2>
+                <p>Consertos rápidos com peças originais.</p>
+                <a href="https://wa.me/5521987624183" target="_blank" class="btn btn-ws">WHATSAPP</a>
+            </section>
 
-</section>
+            <!-- MISSÃO -->
+            <section id="missao" class="layer">
+                <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                <h2>NOSSA MISSÃO</h2>
+                <p>A TranzShock integra tecnologia mecânica avançada ao dia a dia humano.</p>
+            </section>
 
-                <!-- MISSÃO -->
-                <section id="missao" class="layer">
-                    <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
-                    <h2>NOSSA MISSÃO</h2>
-                    <p>A TranzShock integra tecnologia mecânica avançada ao dia a dia humano.</p>
-                </section>
-            </div>
+            <!-- LIVE STREAM -->
+            <section id="live" class="layer">
+                <a href="#home" class="btn" style="width: 50%;">VOLTAR</a>
+                <h2>AO VIVO / EN VIVO / LIVE</h2>
+                <p>Assista em tempo real / Mira en tiempo real / Watch live now!</p>
+                <video
+                    id="live-video"
+                    class="video-js"
+                    controls
+                    autoplay
+                    width="220"
+                    height="400"
+                    poster="https://via.placeholder.com/220x400.png?text=Live+Streaming"
+                    style="margin: 0 auto; display: block;"
+                    data-setup='{}'
+                >
+                    <source src="https://tuservidor.com/stream.m3u8" type="application/x-mpegURL" />
+                    Seu navegador não suporta vídeo HTML5.
+                </video>
+            </section>
 
-            <div class="claw thumb"></div>
-            <div class="claw finger-top"></div>
-            <div class="claw finger-bottom"></div>
         </div>
+
+        <div class="claw thumb"></div>
+        <div class="claw finger-top"></div>
+        <div class="claw finger-bottom"></div>
     </div>
+</div>
 
 </body>
 </html>
+
 
