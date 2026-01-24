@@ -1,256 +1,179 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>TranzShock Ultra 2026</title>
-<link href="https://fonts.googleapis.com" rel="stylesheet">
-<style>
-:root {
-    --neon: #00f2ff;
-    --metal: #2c3e50;
-    --dark: #050505;
-    --transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    --whatsapp: #25D366;
-}
+    <meta charset="UTF-8">
+    <title>TranzShock Ultra 2026</title>
+    <!-- Fuente futurista Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon: #00f2ff;
+            --metal: #2c3e50;
+            --dark: #050505;
+            --transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --whatsapp: #25D366;
+        }
 
-body {
-    background: radial-gradient(circle at center, #1a1c20 0%, #000 80%);
-    margin: 0; height: 100vh;
-    display: flex; justify-content: center; align-items: center;
-    overflow: hidden; font-family: 'Orbitron', sans-serif;
-}
+        body {
+            background: radial-gradient(circle at center, #1a1c20 0%, #000 80%);
+            margin: 0; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; font-family: 'Orbitron', sans-serif;
+        }
 
-.transformer-viewport {
-    perspective: 1200px;
-    display: flex; justify-content: center; align-items: center;
-    width: 100vw; height: 100vh;
-}
+        /* ESCENARIO 3D CENTRADO */
+        .transformer-viewport {
+            perspective: 1200px;
+            display: flex; justify-content: center; align-items: center;
+            width: 100vw; height: 100vh;
+        }
 
-.mech-arm {
-    position: relative;
-    width: 400px; height: 600px;
-    transform-style: preserve-3d;
-    transform: rotateY(-15deg);
-    animation: floating 5s ease-in-out infinite;
-}
+        .mech-arm {
+            position: relative;
+            width: 400px; height: 600px;
+            transform-style: preserve-3d;
+            transform: rotateY(-15deg);
+            animation: floating 5s ease-in-out infinite;
+        }
 
-.part {
-    position: absolute;
-    background: linear-gradient(135deg, #444, #111);
-    border: 1px solid #555;
-    box-shadow: inset 0 0 20px #000;
-    transition: var(--transition);
-}
+        /* PIEZAS DEL ROBOT */
+        .part {
+            position: absolute;
+            background: linear-gradient(135deg, #444, #111);
+            border: 1px solid #555;
+            box-shadow: inset 0 0 20px #000;
+            transition: var(--transition);
+        }
 
-.shoulder {
-    width: 250px; height: 180px;
-    top: -60px; left: -120px;
-    clip-path: polygon(20% 0%, 100% 20%, 80% 90%, 0% 100%, 10% 30%);
-    z-index: 1;
-    animation: assembleShoulder 1.2s ease-out;
-}
+        .shoulder {
+            width: 250px; height: 180px;
+            top: -60px; left: -120px;
+            clip-path: polygon(20% 0%, 100% 20%, 80% 90%, 0% 100%, 10% 30%);
+            z-index: 1;
+            animation: assembleShoulder 1.2s ease-out;
+        }
 
-/* Smartphone con neón animado */
-.smartphone {
-    position: absolute;
-    width: 260px; height: 500px;
-    background: #000;
-    border: 2px solid #ff0055;
-    border-radius: 25px;
-    top: 50px; left: 70px;
-    z-index: 5;
-    overflow: hidden;
-    transform: translateZ(30px);
-    animation: assemblePhone 1s ease-out;
-    box-shadow:
-        0 0 10px #ff0055,
-        0 0 20px #ff0055,
-        0 0 30px #ff0055,
-        0 0 40px #ff0055;
-    animation: neon-phone 1.5s infinite alternate;
-}
+        /* EL CELULAR */
+        .smartphone {
+            position: absolute;
+            width: 260px; height: 500px;
+            background: #000;
+            border: 2px solid var(--neon);
+            border-radius: 25px;
+            top: 50px; left: 70px;
+            z-index: 5;
+            box-shadow: 0 0 30px var(--neon);
+            overflow: hidden;
+            transform: translateZ(30px);
+            animation: assemblePhone 1s ease-out;
+        }
 
-/* LIVE ON AIR indicador */
-#live-indicator {
-    position: absolute;
-    top: 10px; right: 10px;
-    background: #ff0000;
-    color: #fff;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 3px 6px;
-    border-radius: 4px;
-    text-align: center;
-    animation: live-blink 1s infinite alternate;
-    z-index: 10;
-}
+        .layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            display: none;
+            flex-direction: column;
+            color: var(--neon);
+        }
 
-.layer {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: #000;
-    padding: 30px 20px;
-    box-sizing: border-box;
-    display: none;
-    flex-direction: column;
-    color: var(--neon);
-}
+        #home { display: flex; }
+        .layer:target { display: flex; animation: scanIn 0.4s; }
+        #home:has(~ .layer:target) { display: none; }
 
-#home { display: flex; }
-.layer:target { display: flex; animation: scanIn 0.4s; }
-#home:has(~ .layer:target) { display: none; }
+        .btn {
+            display: block; width: 100%; padding: 15px; margin: 10px 0;
+            background: rgba(0, 242, 255, 0.05); border: 1px solid var(--neon);
+            color: var(--neon); text-decoration: none; text-align: center;
+            font-size: 11px; font-weight: bold;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+        .btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
 
-.btn {
-    display: block; width: 100%; padding: 15px; margin: 10px 0;
-    background: rgba(0, 242, 255, 0.05); border: 1px solid var(--neon);
-    color: var(--neon); text-decoration: none; text-align: center;
-    font-size: 11px; font-weight: bold;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-    transition: 0.3s;
-    box-sizing: border-box;
-}
-.btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
-.btn-ws { border-color: var(--whatsapp); color: var(--whatsapp); margin-top: 20px; }
-.btn-ws:hover { background: var(--whatsapp); color: #fff; box-shadow: 0 0 20px var(--whatsapp); }
+        .btn-ws { border-color: var(--whatsapp); color: var(--whatsapp); margin-top: 20px; }
+        .btn-ws:hover { background: var(--whatsapp); color: #fff; box-shadow: 0 0 20px var(--whatsapp); }
 
-.claw { position: absolute; background: #15181b; border: 1px solid var(--neon); z-index: 10; transition: var(--transition); }
-.thumb { width: 80px; height: 160px; top: 310px; left: 20px; clip-path: polygon(100% 15%, 100% 85%, 0 100%, 0 0); animation: assembleClawLeft 1.5s ease-out; }
-.finger-top { width: 120px; height: 90px; top: 90px; right: -20px; clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 80%); animation: assembleClawRight 1.5s ease-out; }
-.finger-bottom { width: 130px; height: 100px; top: 440px; right: -30px; clip-path: polygon(0 20%, 100% 40%, 80% 100%, 0 60%); animation: assembleClawRight 1.7s ease-out; }
+        .claw { position: absolute; background: #15181b; border: 1px solid var(--neon); z-index: 10; transition: var(--transition); }
+        .thumb { width: 80px; height: 160px; top: 300px; left: 20px; clip-path: polygon(100% 15%, 100% 85%, 0 100%, 0 0); animation: assembleClawLeft 1.5s ease-out; }
+        .finger-top { width: 120px; height: 90px; top: 80px; right: -20px; clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 80%); animation: assembleClawRight 1.5s ease-out; }
+        .finger-bottom { width: 130px; height: 100px; top: 430px; right: -30px; clip-path: polygon(0 20%, 100% 40%, 80% 100%, 0 60%); animation: assembleClawRight 1.7s ease-out; }
 
-@keyframes assemblePhone { from { transform: translateZ(200px) scale(0); opacity: 0; } to { transform: translateZ(30px) scale(1); opacity: 1; } }
-@keyframes assembleShoulder { from { left: -300px; transform: rotate(-45deg); opacity: 0; } to { left: -120px; transform: rotate(0deg); opacity: 1; } }
-@keyframes assembleClawRight { from { right: -200px; opacity: 0; } to { right: -20px; opacity: 1; } }
-@keyframes assembleClawLeft { from { left: -200px; opacity: 0; } to { left: 20px; opacity: 1; } }
-@keyframes floating { 0%, 100% { transform: rotateY(-15deg) translateY(0); } 50% { transform: rotateY(-10deg) translateY(-20px); } }
-@keyframes scanIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes assemblePhone { from { transform: translateZ(200px) scale(0); opacity: 0; } to { transform: translateZ(30px) scale(1); opacity: 1; } }
+        @keyframes assembleShoulder { from { left: -300px; transform: rotate(-45deg); opacity: 0; } to { left: -120px; transform: rotate(0deg); opacity: 1; } }
+        @keyframes assembleClawRight { from { right: -200px; opacity: 0; } to { right: -20px; opacity: 1; } }
+        @keyframes assembleClawLeft { from { left: -200px; opacity: 0; } to { left: 20px; opacity: 1; } }
+        @keyframes floating { 0%, 100% { transform: rotateY(-15deg) translateY(0); } 50% { transform: rotateY(-10deg) translateY(-20px); } }
+        @keyframes scanIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
 
-header { font-size: 10px; text-align: center; margin-bottom: 40px; letter-spacing: 2px; }
-h2 { font-size: 14px; text-align: center; border-bottom: 1px solid var(--neon); padding-bottom: 5px; }
-p { font-size: 11px; text-align: center; line-height: 1.6; }
-
-#live h2 {
-    color: #ff0055;
-    text-shadow:
-        0 0 5px #ff0055,
-        0 0 10px #ff0055,
-        0 0 20px #ff0055,
-        0 0 40px #ff0055,
-        0 0 80px #ff0055;
-    animation: neon-flicker 1.5s infinite alternate;
-}
-
-#home a[href="#live"] {
-    animation: pulse-neon 1.2s infinite alternate;
-}
-
-#live video {
-    width: 220px;
-    height: 380px;
-    margin: 0 auto;
-    display: block;
-    border: 2px solid #ff0055;
-    box-shadow: 0 0 15px #ff0055, 0 0 30px #ff0055, 0 0 40px #ff0055;
-    animation: pulse-live 1.5s infinite alternate;
-}
-
-@keyframes neon-flicker {
-    0%,19%,21%,23%,25%,54%,56%,100% { opacity:1; }
-    20%,24%,55% { opacity:0.8; }
-}
-
-@keyframes pulse-neon {
-    0% { box-shadow:0 0 10px #ff0055,0 0 20px #ff0055; }
-    50% { box-shadow:0 0 20px #ff0055,0 0 40px #ff0055; }
-    100% { box-shadow:0 0 10px #ff0055,0 0 20px #ff0055; }
-}
-
-@keyframes neon-phone {
-    0% { box-shadow:0 0 10px #ff0055,0 0 20px #ff0055,0 0 30px #ff0055,0 0 40px #ff0055; }
-    50% { box-shadow:0 0 15px #ff66aa,0 0 30px #ff66aa,0 0 45px #ff66aa,0 0 60px #ff66aa; }
-    100% { box-shadow:0 0 10px #ff0055,0 0 20px #ff0055,0 0 30px #ff0055,0 0 40px #ff0055; }
-}
-
-@keyframes pulse-live {
-    0% { border-color: #ff0055; box-shadow:0 0 15px #ff0055,0 0 30px #ff0055,0 0 40px #ff0055; }
-    50% { border-color: #ff66aa; box-shadow:0 0 25px #ff66aa,0 0 50px #ff66aa,0 0 60px #ff66aa; }
-    100% { border-color: #ff0055; box-shadow:0 0 15px #ff0055,0 0 30px #ff0055,0 0 40px #ff0055; }
-}
-
-@keyframes live-blink {
-    0%,50%,100% { opacity:1; }
-    25%,75% { opacity:0.3; }
-}
-</style>
+        header { font-size: 10px; text-align: center; margin-bottom: 40px; letter-spacing: 2px; }
+        h2 { font-size: 14px; text-align: center; border-bottom: 1px solid var(--neon); padding-bottom: 5px; }
+        p { font-size: 11px; text-align: center; line-height: 1.6; }
+    </style>
 </head>
 <body>
 
-<div class="transformer-viewport">
-<div class="mech-arm">
-    <div class="part shoulder"></div>
+    <div class="transformer-viewport">
+        <div class="mech-arm">
+            <div class="part shoulder"></div>
+            
+            <div class="smartphone">
+                <!-- HOME -->
+                <section id="home" class="layer">
+                    <header>TRANZ SHOCK CELULARES</header>
+                    <a href="#web-dev" class="btn">Desenvolvimento WEB e APP / Desarrollo WEB y APP / WEB & APP DEV</a>
+                    <a href="#reparo" class="btn">CONSERTAR CELULAR / Reparar Celular / CELL REPAIR</a>
+                    <a href="#missao" class="btn">NOSSA MISSÃO / Nuestra Misión / OUR MISSION</a>
+                    <a href="#live" class="btn" style="background: #f00; color:#fff;">AO VIVO / EN VIVO / LIVE ON AIR</a>
+                </section>
 
-    <div class="smartphone">
-        <!-- LIVE ON AIR -->
-        <div id="live-indicator">LIVE ON AIR</div>
+                <!-- DESENVOLVIMENTO WEB E APP -->
+                <section id="web-dev" class="layer">
+                    <a href="#home" class="btn" style="width:50%;">VOLTAR / VOLVER / BACK</a>
+                    <h2>WEB & APP DEV</h2>
+                    <p>Criação de sites e aplicativos futuristas / Creación de sitios y apps futuristas / Futuristic Web & App Dev</p>
+                    <a href="https://wa.me/5521987624183" target="_blank" class="btn btn-ws">
+                        ORÇAMENTO WEB / PRESUPUESTO WEB / WEB QUOTE
+                    </a>
+                </section>
 
-        <!-- HOME -->
-        <section id="home" class="layer">
-            <header>TRANZ SHOCK CELULARES</header>
-            <a href="#web-dev" class="btn">Desenvolvimento WEB e APP</a>
-            <a href="#reparo" class="btn">CONSERTAR CELULAR</a>
-            <a href="#missao" class="btn">NOSSA MISSÃO</a>
-            <a href="#live" class="btn" style="background: rgba(255,0,0,0.1); border-color: #ff0055; color: #ff0055;">AO VIVO / LIVE</a>
-            <a href="https://wa.me/5521987624183?text=Hola%2C%20quiero%20escribirte!" class="btn btn-ws" target="_blank">Escribime al WhatsApp</a>
-        </section>
+                <!-- REPARO TECH -->
+                <section id="reparo" class="layer">
+                    <a href="#home" class="btn" style="width:50%;">VOLTAR / VOLVER / BACK</a>
+                    <h2>REPARO TECH / CELL REPAIR</h2>
+                    <p>Consertos rápidos com peças originais / Reparos rápidos con piezas originales / Fast Repairs with Original Parts</p>
+                    <a href="https://wa.me/5521987624183" target="_blank" class="btn btn-ws">
+                        WHATSAPP
+                    </a>
+                </section>
 
-        <!-- WEB & APP -->
-        <section id="web-dev" class="layer">
-            <a href="#home" class="btn" style="width:50%;">VOLTAR</a>
-            <h2>WEB & APP DEV</h2>
-            <p>Criação de sites e aplicativos futuristas.</p>
-            <a href="https://wa.me/5521987624183" target="_blank" class="btn btn-ws">ORÇAMENTO WEB</a>
-        </section>
+                <!-- MISSÃO -->
+                <section id="missao" class="layer">
+                    <a href="#home" class="btn" style="width:50%;">VOLTAR / VOLVER / BACK</a>
+                    <h2>NOSSA MISSÃO / NUESTRA MISIÓN / OUR MISSION</h2>
+                    <p>A TranzShock integra tecnologia mecânica avançada ao dia a dia humano / TranzShock integra tecnología mecánica avanzada al día a día humano / TranzShock integrates advanced mechanical technology into daily life.</p>
+                </section>
 
-        <!-- REPARO TECH -->
-        <section id="reparo" class="layer">
-            <a href="#home" class="btn" style="width:50%;">VOLTAR</a>
-            <h2>REPARO TECH</h2>
-            <p>Consertos rápidos com peças originais.</p>
-            <a href="https://wa.me/5521987624183" target="_blank" class="btn btn-ws">WHATSAPP</a>
-        </section>
+                <!-- LIVE -->
+                <section id="live" class="layer">
+                    <a href="#home" class="btn" style="width:50%;">VOLTAR / VOLVER / BACK</a>
+                    <h2>AO VIVO / EN VIVO / LIVE</h2>
+                    <p>Assista em tempo real / Mira en tiempo real / Watch live now!</p>
+                    <iframe width="220" height="380" 
+                        src="TU_LINK_DE_RESTREAM" 
+                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                    </iframe>
+                </section>
+            </div>
 
-        <!-- MISSÃO -->
-        <section id="missao" class="layer">
-            <a href="#home" class="btn" style="width:50%;">VOLTAR</a>
-            <h2>NOSSA MISSÃO</h2>
-            <p>A TranzShock integra tecnologia mecânica avançada ao dia a dia humano.</p>
-        </section>
-
-        <!-- LIVE -->
-        <section id="live" class="layer">
-            <a href="#home" class="btn" style="width:50%;">VOLTAR</a>
-            <h2>AO VIVO / EN VIVO / LIVE</h2>
-            <p>Assista em tempo real / Mira en tiempo real / Watch live now!</p>
-            <video
-                id="live-video"
-                controls
-                autoplay
-                width="220"
-                height="380"
-                poster="https://via.placeholder.com/220x400.png?text=Live+Streaming"
-                style="margin:0 auto; display:block;"
-            >
-                <source src="https://tuservidor.com/stream.m3u8" type="application/x-mpegURL" />
-                Seu navegador não suporta vídeo HTML5.
-            </video>
-        </section>
+            <div class="claw thumb"></div>
+            <div class="claw finger-top"></div>
+            <div class="claw finger-bottom"></div>
+        </div>
     </div>
-
-    <div class="claw thumb"></div>
-    <div class="claw finger-top"></div>
-    <div class="claw finger-bottom"></div>
-</div>
-</div>
 
 </body>
 </html>
